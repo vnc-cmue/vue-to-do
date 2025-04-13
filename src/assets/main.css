@@ -1,5 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, forest;
+  themes:
+    light --default,
+    dark --prefersdark,
+    forest;
+}
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  background: -webkit-linear-gradient( #217642, #84b984);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+button {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
