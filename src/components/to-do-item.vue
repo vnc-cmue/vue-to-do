@@ -10,15 +10,12 @@
       'cursor-pointer',
       'w-52',
       'transition-all duration-300 ease-in-out',
-      { 'bg-primary-content': done },
-      { 'bg-primary-content': !done },
-      { 'h-24': !openCard, 'h-82': openCard },
+      { 'bg-base-100': done },
+      { 'bg-base-100': !done },
+      dynmaicHeight,
     ]"
     @click.prevent="toggleCard"
   >
-    <div v-if="openCard" class="relative mb-5">
-      <button @click="removeAndLog(id)" class="absolute btn btn-error w-12 top-2 right-2 size-6">X</button>
-    </div>
     <div
       :class="[
         'card-body',
@@ -27,14 +24,21 @@
       ]"
     >
       <h2 class="card-title">{{ title }}</h2>
-      <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out">{{ text }}</p>
+      <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out">
+        {{ text }}
+      </p>
     </div>
-    <div class="card-actions justify-start">
-      <button v-if="!done" class="btn btn-success mt-2 w-full" @click.stop="toggleDoneStatus(id)">
-        ✓
-      </button>
-      <button v-else @click.stop="toggleDoneStatus(id)" class="btn btn-warning mt-2 w-full">
-        X
+    <div v-if="openCard">
+      <toDoControls :id="id" />
+    </div>
+    <div class="card-actions justify-center my-2">
+      <button
+        :style="{ width: done ? '25%' : '90%' }"
+        class="btn transition-all duration-300 ease-in-out"
+        :class="done ? 'btn-error' : 'btn-success'"
+        @click.stop="toggleDoneStatus(id)"
+      >
+        {{ done ? 'X' : '✓' }}
       </button>
     </div>
   </div>
@@ -42,9 +46,10 @@
 
 <script setup lang="ts">
 import { useTodoStore } from '../stores/todo'
-import { ref } from 'vue'
+import toDoControls from './to-do-controls.vue'
+import { ref, computed } from 'vue'
 
-const { toggleDoneStatus, removeTodo } = useTodoStore()
+const { toggleDoneStatus } = useTodoStore()
 
 const props = defineProps({
   id: {
@@ -72,8 +77,9 @@ const toggleCard = () => {
   openCard.value = !openCard.value
 }
 
-const removeAndLog = (id: number) => {
-  console.log('Entferne Todo mit ID:', id)
-  removeTodo(id)
-}
+const dynmaicHeight = computed(() => {
+  if (!openCard.value) return 'h-24'
+  if (props.text && props.text.length > 1) return 'h-72'
+  return 'h-48'
+})
 </script>
