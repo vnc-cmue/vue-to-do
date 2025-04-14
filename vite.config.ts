@@ -13,6 +13,9 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss()
   ],
+  define: {
+    'process.env': process.env, // Dies stellt sicher, dass deine Umgebungsvariablen korrekt verfügbar sind
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
