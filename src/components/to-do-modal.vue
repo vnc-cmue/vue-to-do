@@ -14,5 +14,8 @@ import todoForm from './to-do-form.vue'
 import { useTodoStore } from '../stores/todo'
 
 const store  = useTodoStore()
-const edit = computed(() => store.edit)
+const edit = computed(() =>
+  store.edit === null ? undefined : store.edit
+)
+
 </script>
