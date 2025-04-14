@@ -5,8 +5,13 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import todoItem from './to-do-item.vue'
 import { useTodoStore } from '../stores/todo'
 
 const store = useTodoStore()
+
+onMounted(() => {
+  store.loadTodos()
+})
 </script>

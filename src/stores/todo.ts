@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { supabase } from '@/utils/supabase'
 
 export const useTodoStore = defineStore('todo', {
   state: () => ({
@@ -7,9 +8,32 @@ export const useTodoStore = defineStore('todo', {
     edit: null as null | { id: number; title: string; text: string },
   }),
   actions: {
-    addTodo(title: string, text: string) {
-      this.todos.push({ id: Date.now(), title, text, done: false })
+    async loadTodos() {
+      const { data, error } = await supabase.from('todos').select('*')
+
+      if (error) {
+        console.error('Fehler beim laden der Todos', error.message);
+        return
+      } if (data && Array.isArray(data)) {
+        this.todos = data
+        console.log(this.todos)
+      } else {
+        console.error('Keine gültigen Daten erhalten:', data)
+      }
     },
+    async addTodo(title: string, text: string) {
+      const { data, error } = await supabase
+        .from('todos')
+        .insert([{ title, text, done: false }])
+        .select()
+
+      if (error) {
+        console.error('Fehler beim Hinzufügen des Todos:', error.message)
+      } else if (data && Array.isArray(data)) {
+        this.todos.push(...data)
+      }
+    },
+
     removeTodo(id: number) {
       this.todos = this.todos.filter((todo) => todo.id !== id)
     },
