@@ -17,15 +17,17 @@ h6 {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 600;
   font-style: normal;
-  background: -webkit-linear-gradient( #217642, #84b984);
+  /* background: -webkit-linear-gradient( #217642, #84b984);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
 }
 
 html {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
   font-style: normal;
+  background: #22854b;
+  background: linear-gradient(90deg, rgba(34, 133, 75, 1) 0%, rgba(22, 97, 79, 1) 100%);
 }
 
 button {
@@ -33,3 +35,7 @@ button {
   font-weight: 300;
   font-style: normal;
 }
+
+/* legend {
+  color: aquamarine;
+} */

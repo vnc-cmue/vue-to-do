@@ -4,7 +4,7 @@
       <legend class="fieldset-legend">To-Do erstellen</legend>
       <div class="join">
         <input
-          @keyup.enter="addTodoHandler(userInputTitle, userInputText)"
+          @keyup.enter="saveHandler()"
           type="text"
           class="input join-item border-primary"
           placeholder="Aufgabe"
@@ -13,7 +13,7 @@
       </div>
       <div>
         <input
-          @keyup.enter="addTodoHandler(userInputTitle, userInputText)"
+          @keyup.enter="saveHandler()"
           type="text"
           class="input join-item border-primary"
           placeholder="Text"
@@ -21,10 +21,10 @@
         />
       </div>
       <div>
-        <input type="datetime-local" class="input"/>
+        <input type="datetime-local" class="input" v-model="userInputDate" />
       </div>
       <button
-        @click="addTodoHandler(userInputTitle, userInputText)"
+        @click="saveHandler()"
         class="btn btn-soft btn-secondary"
       >
         Sichern
@@ -34,20 +34,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useTodoStore } from '../stores/todo'
+
+const props = defineProps<{
+  editingTodo?: { id: number; title: string; text: string }
+}>()
 
 const userInputTitle = ref<string>('')
 const userInputText = ref<string>('')
-const { addTodo } = useTodoStore()
+const userInputDate = ref<Date>()
+const { addTodo, updateTodo } = useTodoStore()
 
-const addTodoHandler = (title: string, text: string) => {
-  if (title.trim()) {
-    addTodo(title, text)
-    userInputTitle.value = ''
-    userInputText.value = ''
+const saveHandler = () => {
+  if (props.editingTodo) {
+    updateTodo({ id: props.editingTodo.id, title: userInputTitle.value, text: userInputText.value })
+  } else {
+    addTodo(userInputTitle.value, userInputText.value)
   }
+
+  userInputTitle.value = ''
+  userInputText.value = ''
 }
+
+watch(
+  () => props.editingTodo,
+  (newVal) => {
+    if (newVal) {
+      userInputTitle.value = newVal.title
+      userInputText.value = newVal.text
+    }
+  },
+  { immediate: false },
+)
 </script>
 
 <style scoped></style>
