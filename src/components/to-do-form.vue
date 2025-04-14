@@ -23,12 +23,7 @@
       <div>
         <input type="datetime-local" class="input" v-model="userInputDate" />
       </div>
-      <button
-        @click="saveHandler()"
-        class="btn btn-soft btn-secondary"
-      >
-        Sichern
-      </button>
+      <button @click="saveHandler()" class="btn btn-soft btn-secondary">Sichern</button>
     </fieldset>
   </div>
 </template>

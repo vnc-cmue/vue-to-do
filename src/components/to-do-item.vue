@@ -78,8 +78,8 @@ const toggleCard = () => {
 }
 
 const dynmaicHeight = computed(() => {
-  if(!openCard.value) return 'h-24'
-  if(props.text && props.text.length > 1) return 'h-72'
+  if (!openCard.value) return 'h-24'
+  if (props.text && props.text.length > 1) return 'h-72'
   return 'h-48'
 })
 </script>
