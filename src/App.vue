@@ -15,7 +15,7 @@ import todoModal from './components/to-do-modal.vue'
         <todoFilter />
       </div>
     </div>
-    <div class="grid grid-row px-4 gap-4">
+    <div class="grid grid-row px-4 gap-4 mb-32">
       <todoList />
     </div>
     <todoModal />
