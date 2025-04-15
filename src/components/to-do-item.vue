@@ -8,7 +8,7 @@
       'my-4',
       'duration-300 ease-in-out',
       'cursor-pointer',
-      'w-52',
+      'w-full',
       'transition-all duration-300 ease-in-out',
       { 'bg-base-100': done },
       { 'bg-base-100': !done },
@@ -33,7 +33,7 @@
     </div>
     <div class="card-actions justify-center my-2">
       <button
-        :style="{ width: done ? '25%' : '90%' }"
+        :style="{ width: done ? '25%' : '95%' }"
         class="btn transition-all duration-300 ease-in-out"
         :class="done ? 'btn-error' : 'btn-success'"
         @click.stop="toggleDoneStatus(id)"
