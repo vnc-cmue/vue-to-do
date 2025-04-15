@@ -22,7 +22,10 @@
         { 'items-center': !openCard, 'items-start': openCard },
       ]"
     >
-      <h2 class="card-title">{{ title }}</h2>
+      <div class="flex">
+        <h2 class="card-title">{{ title }}</h2>
+        <div :class="['badge', 'absolute', 'right-2', 'top-2', {'badge-error': prio}, {'badge-primary': !prio}]"></div>
+      </div>
       <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out">
         {{ text }}
       </p>
@@ -53,21 +56,25 @@ const { toggleDoneStatus } = useTodoStore()
 const props = defineProps({
   id: {
     type: Number,
-    required: true,
+    required: true
   },
   title: {
     type: String,
-    required: true,
+    required: true
   },
   text: {
     type: String,
-    required: false,
+    required: false
   },
   done: {
     type: Boolean,
     default: false,
-    required: true,
+    required: true
   },
+  prio: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const openCard = ref(false)

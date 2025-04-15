@@ -3,9 +3,9 @@ import { supabase } from '@/utils/supabase'
 
 export const useTodoStore = defineStore('todo', {
   state: () => ({
-    todos: [] as { id: number; title: string; text: string; done: boolean, prio: 'low' | 'middle' | 'high' }[],
-    filtered: [] as { id: number; title: string; text: string; done: boolean, prio: 'low' | 'middle' | 'high' }[],
-    edit: null as null | { id: number; title: string; text: string },
+    todos: [] as { id: number; title: string; text: string; done: boolean, prio: boolean }[],
+    filtered: [] as { id: number; title: string; text: string; done: boolean, prio: boolean }[],
+    edit: null as null | { id: number; title: string; text: string; prio: boolean },
   }),
   actions: {
     async loadTodos() {
@@ -21,10 +21,10 @@ export const useTodoStore = defineStore('todo', {
         console.error('Keine gültigen Daten erhalten:', data)
       }
     },
-    async addTodo(title: string, text: string) {
+    async addTodo(title: string, text: string, prio: boolean) {
       const { data, error } = await supabase
         .from('todos')
-        .insert([{ title, text, done: false }])
+        .insert([{ title, text, done: false, prio }])
         .select()
 
       if (error) {
@@ -59,19 +59,19 @@ export const useTodoStore = defineStore('todo', {
     filterTodo(done: boolean) {
       this.filtered = this.todos.filter((todo) => todo.done === done)
     },
-    async updateTodo(updatedTodo: { id: number; title: string; text: string }) {
+    async updateTodo(updatedTodo: { id: number; title: string; text: string; prio: boolean }) {
       const index = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
       if (index !== -1) {
         this.todos[index] = { ...this.todos[index], ...updatedTodo }
       }
 
-      const { error } = await supabase.from('todos').update({title: updatedTodo.title, text: updatedTodo.text}).eq('id', updatedTodo.id)
+      const { error } = await supabase.from('todos').update({title: updatedTodo.title, text: updatedTodo.text, prio: updatedTodo.prio}).eq('id', updatedTodo.id)
       if (error) {
         console.error('Fehler beim Bearbeiten der der todos');
         return
       }
     },
-    editingToEdit(todo: { id: number; title: string; text: string }) {
+    editingToEdit(todo: { id: number; title: string; text: string; prio: boolean }) {
       this.edit = todo
     },
   },

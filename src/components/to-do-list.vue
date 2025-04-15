@@ -1,6 +1,6 @@
 <template>
   <div v-for="todo in store.todos" :key="todo.id" class="flex justify-center">
-    <todoItem :id="todo.id" :title="todo.title" :done="todo.done" :text="todo.text" />
+    <todoItem :id="todo.id" :title="todo.title" :done="todo.done" :text="todo.text" :prio="todo.prio" />
   </div>
 </template>
 
