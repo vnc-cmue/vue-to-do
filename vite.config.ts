@@ -5,16 +5,18 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 
+const repoName = 'vue-to-do'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-    tailwindcss()
+    tailwindcss(),
   ],
+  base: `/${repoName}/`,
   define: {
-    'process.env': process.env, // Dies stellt sicher, dass deine Umgebungsvariablen korrekt verfügbar sind
+    'process.env': process.env,
   },
   resolve: {
     alias: {
