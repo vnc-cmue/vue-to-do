@@ -1,5 +1,5 @@
 <template>
-  <div v-for="todo in store.todos" :key="todo.id" class="place-items-center">
+  <div v-for="todo in store.todos" :key="todo.id" class="flex justify-center">
     <todoItem :id="todo.id" :title="todo.title" :done="todo.done" :text="todo.text" />
   </div>
 </template>

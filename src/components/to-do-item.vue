@@ -4,11 +4,10 @@
     :class="[
       'card',
       'text-neutral-content',
-      'mx-5',
       'my-4',
       'duration-300 ease-in-out',
       'cursor-pointer',
-      'w-full',
+      'w-75',
       'transition-all duration-300 ease-in-out',
       { 'bg-base-100': done },
       { 'bg-base-100': !done },
