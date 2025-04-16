@@ -1,5 +1,5 @@
 <template>
-  <div class="place-items-center content-center h-screen">
+  <div class="flex items-center justify-center h-screen px-4">
     <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
       <legend class="fieldset-legend">Login</legend>
 
