@@ -24,7 +24,7 @@
     >
       <div class="flex">
         <h2 class="card-title">{{ title }}</h2>
-        <div :class="['badge', 'absolute', 'right-2', 'top-2', {'badge-error': prio}, {'badge-primary': !prio}]"></div>
+        <div :class="['badge', 'absolute', 'right-2', 'top-2', {'badge-error': prio}, {'badge-success': !prio}]"></div>
       </div>
       <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out">
         {{ text }}
