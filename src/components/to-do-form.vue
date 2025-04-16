@@ -27,16 +27,16 @@
         </label>
       </div>
 
-      <div class="flex justify-center mb-3">
+      <div class="flex items-center mb-3">
         <h3 class="mr-5">Priorität</h3>
         <label class="mr-5">
           <input type="checkbox" v-model="userInputPrio" class="checkbox checkbox-primary mr-2" />
           <span>Hoch</span>
         </label>
       </div>
-      <div>
+      <!-- <div>
         <input type="datetime-local" class="input mb-3" v-model="userInputDate" />
-      </div>
+      </div> -->
       <button @click="saveHandler()" class="btn btn-success">Sichern</button>
     </fieldset>
   </div>
@@ -53,7 +53,7 @@ const props = defineProps<{
 const userInputTitle = ref<string>('')
 const userInputText = ref<string>('')
 const userInputPrio = ref<boolean>(false)
-const userInputDate = ref<Date>()
+// const userInputDate = ref<Date>()
 const { addTodo, updateTodo } = useTodoStore()
 
 const saveHandler = () => {
