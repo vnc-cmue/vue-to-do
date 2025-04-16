@@ -3,8 +3,8 @@ import { supabase } from '@/utils/supabase'
 
 export const useTodoStore = defineStore('todo', {
   state: () => ({
-    todos: [] as { id: number; title: string; text: string; done: boolean, prio: boolean }[],
-    filtered: [] as { id: number; title: string; text: string; done: boolean, prio: boolean }[],
+    todos: [] as { id: number; title: string; text: string; done: boolean; prio: boolean }[],
+    filtered: [] as { id: number; title: string; text: string; done: boolean; prio: boolean }[],
     edit: null as null | { id: number; title: string; text: string; prio: boolean },
   }),
   actions: {
@@ -65,14 +65,23 @@ export const useTodoStore = defineStore('todo', {
         this.todos[index] = { ...this.todos[index], ...updatedTodo }
       }
 
-      const { error } = await supabase.from('todos').update({title: updatedTodo.title, text: updatedTodo.text, prio: updatedTodo.prio}).eq('id', updatedTodo.id)
+      const { error } = await supabase
+        .from('todos')
+        .update({ title: updatedTodo.title, text: updatedTodo.text, prio: updatedTodo.prio })
+        .eq('id', updatedTodo.id)
       if (error) {
-        console.error('Fehler beim Bearbeiten der der todos');
+        console.error('Fehler beim Bearbeiten der der todos')
         return
       }
     },
     editingToEdit(todo: { id: number; title: string; text: string; prio: boolean }) {
       this.edit = todo
     },
+    async authUser(inputEmail: string, inputPassword: string) {
+      return await supabase.auth.signInWithPassword({
+        email: inputEmail,
+        password: inputPassword,
+      })
+    }
   },
 })
