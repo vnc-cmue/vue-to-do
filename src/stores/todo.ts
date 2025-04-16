@@ -77,5 +77,11 @@ export const useTodoStore = defineStore('todo', {
     editingToEdit(todo: { id: number; title: string; text: string; prio: boolean }) {
       this.edit = todo
     },
+    async authUser(inputEmail: string, inputPassword: string) {
+      return await supabase.auth.signInWithPassword({
+        email: inputEmail,
+        password: inputPassword,
+      })
+    }
   },
 })
