@@ -1,0 +1,16 @@
+{
+    "name": "Meine To-Do App",
+    "short_name": "To-Do",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2a2e37",
+    "theme_color": "#2a2e37",
+    "icons": [
+      {
+        "src": "/apple-touch-icon.png",
+        "sizes": "180x180",
+        "type": "image/png"
+      }
+    ]
+  }
+  
