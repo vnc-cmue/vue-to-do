@@ -4,13 +4,13 @@
     :class="[
       'card',
       'text-neutral-content',
+      'bg-base-300',
       'my-4',
       'duration-300 ease-in-out',
       'cursor-pointer',
       'w-75',
       'transition-all duration-300 ease-in-out',
-      { 'bg-base-100': done },
-      { 'bg-base-100': !done },
+
       dynmaicHeight,
     ]"
     @click.prevent="toggleCard"
@@ -20,13 +20,14 @@
         'card-body',
         'transition-all duration-300 ease-in-out',
         { 'items-center': !openCard, 'items-start': openCard },
+        { 'opacity-50': done },
       ]"
     >
       <div class="flex">
-        <h2 class="card-title">{{ title }}</h2>
+        <h2 class="card-title" :class="{'text-done': done}">{{ title }}</h2>
         <div :class="['badge', 'absolute', 'right-2', 'top-2', {'badge-error': prio}, {'badge-success': !prio}]"></div>
       </div>
-      <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out">
+      <p v-if="openCard" class="text-base-content transition-all duration-300 ease-in-out" :class="{'text-done': done}">
         {{ text }}
       </p>
     </div>
@@ -89,3 +90,9 @@ const dynmaicHeight = computed(() => {
   return 'h-48'
 })
 </script>
+
+<style lang="css">
+.text-done {
+  text-decoration: line-through!important;
+}
+</style>
