@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTodoStore } from '../stores/todo'
+import { useTodoStore } from '../../stores/todo'
 const { removeTodo } = useTodoStore()
 
 const { todos, editingToEdit } = useTodoStore()
@@ -19,7 +19,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const startEditing = (id: number) => {
-  const todo = todos.find((t) => t.id === id)
+  const todo = todos.find((todo) => todo.id === id)
   if (todo) {
     editingToEdit(todo)
     const el = document.getElementById('todoModal') as HTMLInputElement

@@ -56,8 +56,12 @@ export const useTodoStore = defineStore('todo', {
       }
       todo.done = newDoneStatus
     },
-    filterTodo(done: boolean) {
-      this.filtered = this.todos.filter((todo) => todo.done === done)
+    filterTodo(done: boolean, filter: boolean) {
+      if (filter === true) {
+        this.filtered = this.todos.filter((todo) => todo.done !== done)
+      } else {
+        this.filtered = this.todos.filter((todo) => todo.id === todo.id)
+      }
     },
     async updateTodo(updatedTodo: { id: number; title: string; text: string; prio: boolean }) {
       const index = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
@@ -76,6 +80,9 @@ export const useTodoStore = defineStore('todo', {
     },
     editingToEdit(todo: { id: number; title: string; text: string; prio: boolean }) {
       this.edit = todo
+    },
+    clearEdit() {
+      this.edit = null
     },
     async authUser(inputEmail: string, inputPassword: string) {
       return await supabase.auth.signInWithPassword({

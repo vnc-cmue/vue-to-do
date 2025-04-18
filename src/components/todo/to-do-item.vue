@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTodoStore } from '../stores/todo'
+import { useTodoStore } from '../../stores/todo'
 import toDoControls from './to-do-controls.vue'
 import { ref, computed } from 'vue'
 
