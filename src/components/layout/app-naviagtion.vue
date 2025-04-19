@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed bottom-2 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-neutral rounded-xl shadow-lg flex justify-around py-3 px-4 text-white z-50">
+  <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-neutral rounded-xl shadow-lg flex justify-around py-3 px-4 text-white z-50">
     <RouterLink to="/home" class="tooltip tooltip-top" data-tip="Home">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
            viewBox="0 0 24 24" stroke="currentColor">
