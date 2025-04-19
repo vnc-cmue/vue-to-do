@@ -2,6 +2,13 @@
   <form class="filter mt-5">
     <input @click="filterTodo(false, false)" class="btn btn-error" type="reset" value="×" />
     <input
+      @click="filterTodo(false, false)"
+      class="btn btn-outline btn-warning"
+      type="radio"
+      name="frameworks"
+      aria-label="Alle"
+    />
+    <input
       @click="filterTodo(true, true)"
       class="btn btn-outline btn-warning"
       type="radio"
@@ -14,6 +21,13 @@
       type="radio"
       name="frameworks"
       aria-label="Erledigt"
+    />
+    <input
+      @click="filterTodo(false, true)"
+      class="btn btn-outline btn-warning"
+      type="radio"
+      name="frameworks"
+      aria-label="Wichtig"
     />
   </form>
 </template>

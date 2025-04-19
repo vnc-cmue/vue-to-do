@@ -4,7 +4,7 @@
     :class="[
       'card',
       'text-neutral-content',
-      'bg-base-300',
+      'bg-neutral',
       'my-4',
       'duration-300 ease-in-out',
       'cursor-pointer',

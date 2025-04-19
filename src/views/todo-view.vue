@@ -3,11 +3,15 @@ import todoList from '@/components/todo/to-do-list.vue'
 import todoFilter from '@/components/todo/to-do-filter.vue'
 import todoTab from '@/components/layout/app-naviagtion.vue'
 import todoModal from '@/components/todo/to-do-modal.vue'
+import todoHeader from '@/components/todo/to-do-header.vue'
 </script>
 
 <template>
   <main class="max-w-screen-lg mx-auto px-4">
     <div class="flex flex-col place-items-center my-5">
+      <div>
+        <todoHeader />
+      </div>
       <div>
         <todoTab />
       </div>
@@ -20,10 +24,6 @@ import todoModal from '@/components/todo/to-do-modal.vue'
     </div>
     <todoModal />
 
-    <div class="fixed bottom-8 right-8 z-50">
-      <label for="todoModal" class="btn btn-success w-16 h-16 text-xl">＋</label>
-    </div>
-    
   </main>
 </template>
 
