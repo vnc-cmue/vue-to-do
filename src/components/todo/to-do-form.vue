@@ -1,11 +1,14 @@
 <template>
   <div>
     <fieldset class="fieldset w-xs bg-base-100 border border-primary p-4 rounded-box">
-      <legend class="fieldset-legend">To-Do erstellen</legend>
+      <legend class="fieldset-legend">
+        {{ editingTodo ? 'To-Do bearbeiten' : 'To-Do erstellen' }}
+      </legend>
+
       <div class="mb-3">
         <label class="floating-label">
           <input
-            @keyup.enter="saveHandler()"
+            @keyup.enter="saveHandler"
             type="text"
             class="input join-item border-primary"
             placeholder="Aufgabe"
@@ -14,10 +17,11 @@
           <span>Aufgabe</span>
         </label>
       </div>
+
       <div class="mb-3">
         <label class="floating-label">
           <input
-            @keyup.enter="saveHandler()"
+            @keyup.enter="saveHandler"
             type="text"
             class="input join-item border-primary"
             placeholder="Beschreibung"
@@ -34,59 +38,65 @@
           <span>Hoch</span>
         </label>
       </div>
-      <!-- <div>
-        <input type="datetime-local" class="input mb-3" v-model="userInputDate" />
-      </div> -->
-      <button @click="saveHandler()" class="btn btn-success">Sichern</button>
+
+      <button @click="saveHandler" class="btn btn-success">
+        {{ editingTodo ? 'Aktualisieren' : 'Sichern' }}
+      </button>
     </fieldset>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useTodoStore } from '../stores/todo'
+import { ref, watch, computed } from 'vue'
+import { useTodoStore } from '@/stores/todo'
 
-const props = defineProps<{
-  editingTodo?: { id: number; title: string; text: string; prio: boolean }
-}>()
+const todoStore = useTodoStore()
 
-const userInputTitle = ref<string>('')
-const userInputText = ref<string>('')
-const userInputPrio = ref<boolean>(false)
-// const userInputDate = ref<Date>()
-const { addTodo, updateTodo } = useTodoStore()
+const editingTodo = computed(() => todoStore.edit)
+
+const userInputTitle = ref('')
+const userInputText = ref('')
+const userInputPrio = ref(false)
 
 const saveHandler = () => {
-  if (props.editingTodo) {
-    updateTodo({
-      id: props.editingTodo.id,
+  if (editingTodo.value) {
+    todoStore.updateTodo({
+      id: editingTodo.value.id,
       title: userInputTitle.value,
       text: userInputText.value,
-      prio: userInputPrio.value,
+      prio: userInputPrio.value
     })
-    //clodse Modal if checked
-    const modal = document.getElementById('todoModal') as HTMLInputElement
-    if (modal) modal.checked = false
+    todoStore.clearEdit()
+    closeModal()
   } else {
-    addTodo(userInputTitle.value, userInputText.value, userInputPrio.value)
+    todoStore.addTodo(userInputTitle.value, userInputText.value, userInputPrio.value)
   }
 
+  clearInputs()
+}
+
+const closeModal = () => {
+  const modal = document.getElementById('todoModal') as HTMLInputElement
+  if (modal) modal.checked = false
+}
+
+const clearInputs = () => {
   userInputTitle.value = ''
   userInputText.value = ''
   userInputPrio.value = false
 }
 
 watch(
-  () => props.editingTodo,
+  () => editingTodo.value,
   (newVal) => {
     if (newVal) {
       userInputTitle.value = newVal.title
       userInputText.value = newVal.text
       userInputPrio.value = newVal.prio
+    } else {
+      clearInputs()
     }
   },
-  { immediate: false },
+  { immediate: true }
 )
 </script>
-
-<style scoped></style>

@@ -4,7 +4,7 @@
     :class="[
       'card',
       'text-neutral-content',
-      'bg-base-300',
+      'bg-neutral',
       'my-4',
       'duration-300 ease-in-out',
       'cursor-pointer',
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTodoStore } from '../stores/todo'
+import { useTodoStore } from '../../stores/todo'
 import toDoControls from './to-do-controls.vue'
 import { ref, computed } from 'vue'
 

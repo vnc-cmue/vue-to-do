@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import todoList from './components/to-do-list.vue'
-import todoFilter from './components/to-do-filter.vue'
-import todoTab from './components/to-do-tab.vue'
-import todoModal from './components/to-do-modal.vue'
+import Navigation from './components/layout/app-naviagtion.vue'
 </script>
 
 <template>
     <RouterView />
+    <Navigation />
 </template>
 
 <style scoped></style>
