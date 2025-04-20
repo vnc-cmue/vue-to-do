@@ -5,6 +5,7 @@ export const useTodoStore = defineStore('todo', {
   state: () => ({
     todos: [] as { id: number; title: string; text: string; done: boolean; prio: boolean }[],
     filtered: [] as { id: number; title: string; text: string; done: boolean; prio: boolean }[],
+    isFiltered: false,
     edit: null as null | { id: number; title: string; text: string; prio: boolean },
   }),
   actions: {
@@ -55,13 +56,19 @@ export const useTodoStore = defineStore('todo', {
         return
       }
       todo.done = newDoneStatus
+      this.todos.sort((a, b) => Number(a.done) - Number(b.done))
     },
-    filterTodo(done: boolean, filter: boolean) {
-      if (filter === true) {
-        this.filtered = this.todos.filter((todo) => todo.done !== done)
-      } else {
-        this.filtered = this.todos.filter((todo) => todo.id === todo.id)
-      }
+    filterTodo({ done, prio }: { done?: boolean; prio?: boolean }) {
+      this.filtered = this.todos.filter((todo) => {
+        const matchDone = done === undefined || todo.done === done
+        const matchPrio = prio === undefined || todo.prio === prio
+        return matchDone && matchPrio
+      })
+      this.isFiltered = true
+    },
+    clearFilter() {
+      this.filtered = []
+      this.isFiltered = false
     },
     async updateTodo(updatedTodo: { id: number; title: string; text: string; prio: boolean }) {
       const index = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
@@ -89,6 +96,6 @@ export const useTodoStore = defineStore('todo', {
         email: inputEmail,
         password: inputPassword,
       })
-    }
+    },
   },
 })

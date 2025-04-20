@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="fixed bottom-26 right-2 z-50">
-      <label for="todoModal" class="btn btn-info w-16 h-16 text-xl">＋</label>
-    </div>
+  <div class="">
+    <h1 class="text-3xl">To-Do´s</h1>
   </div>
 </template>
 

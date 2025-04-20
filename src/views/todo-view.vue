@@ -9,7 +9,7 @@ import todoHeader from '@/components/todo/to-do-header.vue'
 <template>
   <main class="max-w-screen-lg mx-auto px-4">
     <div class="flex flex-col place-items-center my-5">
-      <div>
+      <div class="mb-5">
         <todoHeader />
       </div>
       <div>
@@ -19,7 +19,7 @@ import todoHeader from '@/components/todo/to-do-header.vue'
         <todoFilter />
       </div>
     </div>
-    <div class="grid grid-row px-4 gap-4 mb-32">
+    <div class="grid grid-row px-4 gap-4 mb-12">
       <todoList />
     </div>
     <todoModal />
